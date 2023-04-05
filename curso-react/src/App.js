@@ -19,24 +19,26 @@ class App extends Component {
         data: new Date(2023, 3, 29),
         mensagem: 'Eu sou um estudante da gataria.'
       }
-    ]
+    ],
+
+    novoComentario: {
+      nome: '',
+      email: '',
+      mensagem: ''
+    }
   }
 
-  adicionarComentario = () => {
-    console.log("Adicionando comentario")
+  adicionarComentario = evento => {
 
-    const novoComentario = {
-      nome: 'Paulo',
-      email: 'paulo@gmail.com',
-      data: new Date(),
-      mensagem: 'Sou dono da gataria'
-    }
+    evento.preventDefault();
+    const novoComentario = {...this.state.novoComentario, data: new Date()}
+    this.setState({ coments: [ ...this.state.coments, novoComentario ], novoComentario: {nome: '', email: '', mensagem: ''}
+    })
+  }
 
-    // let lista = this.state.coments;
-    // lista.push(novoComentario);
-    // this.setState({ coments: lista });
-
-    this.setState({ coments: [ ...this.state.coments, novoComentario ]})
+  digitacao = evento => {
+    const { name, value } = evento.target;
+    this.setState({ novoComentario: {...this.state.novoComentario, [name]: value }  })
   }
 
   render() {
@@ -54,7 +56,37 @@ class App extends Component {
       </Comentario>
         ))}
 
-        <button onClick={this.adicionarComentario}>Adicionar um comentario</button>
+        <form method='post' onSubmit={this.adicionarComentario}>
+          <h2>Adicionar Comentario</h2>
+
+          <div>
+          <input 
+          type='text'
+          name='nome'
+          value={this.state.novoComentario.nome}
+          onChange={this.digitacao}
+          placeholder='Digite seu nome'/>
+          </div>
+
+          <div>
+          <input 
+          type='email'
+          name='email'
+          value={this.state.novoComentario.email}
+          onChange={this.digitacao}
+          placeholder='Digite seu email'/>
+          </div>
+
+          <div>
+          <textarea 
+          type='mensagem' 
+          value={this.state.novoComentario.mensagem}
+          onChange={this.digitacao}
+          rows='4' />
+          </div>
+          
+          <button type='submit'>Adicionar Comentario</button>
+        </form>
       </div>
     ); 
   }
