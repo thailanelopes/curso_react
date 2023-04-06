@@ -8,14 +8,14 @@ class App extends Component {
       {
         nome: "Joao",
         email: "joao@gmail.com",
-        data: new Date(2023, 3, 29),
+        data: new Date(2023, 3, 29, 17, 30, 0),
         mensagem: "Eu sou um estudante da gataria.",
       },
 
       {
         nome: "Maria",
         email: "maria@gmail.com",
-        data: new Date(2023, 3, 29),
+        data: new Date(2023, 3, 29, 17, 30, 0),
         mensagem: "Eu sou um estudante da gataria.",
       },
     ],
